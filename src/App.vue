@@ -36,6 +36,20 @@
                   placeholder="input ip address for searching"
                   @search="onSearch"
                   enterButton
+                  size="large"
+                />
+              </a-form-item>
+            </a-col>
+          </a-row>
+          <a-row>
+            <a-col :span="24">
+              <a-form-item>
+                <a-input-search
+                  v-decorator="['subnetsUrl']"
+                  placeholder="input the url of the subnets file"
+                  @search="onLoadSubnets"
+                  enterButton="Load subnets resources"
+                  size="large"
                 />
               </a-form-item>
             </a-col>
@@ -64,12 +78,20 @@
           </a-row>
           <a-row>
             <a-col :span="24">
-              <a-form-item>
-                <a-textarea
-                  v-decorator="['result']"
-                  placeholder="Result"
-                  :rows="5"
-                />
+              <a-form-item label="Results">
+                <a-popover
+                  v-for="(item, index) in results"
+                  :key="index"
+                  title="More info"
+                >
+                  <template slot="content">
+                    <p>{{ JSON.stringify(item, null, 2) }}</p>
+                  </template>
+                  <a-tag color="green"
+                    >{{ item.ip }} {{ item.cidr || item.mask }} #
+                    {{ item.comments }}</a-tag
+                  >
+                </a-popover>
               </a-form-item>
             </a-col>
           </a-row>
@@ -84,6 +106,7 @@
 <script>
 /*eslint no-console: "warn"*/
 /*eslint no-unused-vars: "warn"*/
+/*eslint no-useless-escape: "warn"*/
 import { subnet, cidrSubnet } from "browserify-ip";
 
 export default {
@@ -91,9 +114,28 @@ export default {
     this.form = this.$form.createForm(this);
   },
   data: () => {
-    return {};
+    return { results: [] };
   },
   methods: {
+    async onLoadSubnets(url) {
+      try {
+        const response = await fetch(url);
+        // if HTTP-status is 200-299
+        if (response.ok) {
+          let searchList = await response.text();
+          this.form.setFieldsValue({ searchList });
+        } else {
+          this.$message.error(
+            `load resource failed with HTTP-Error: ${response.status}`
+          );
+        }
+      } catch (error) {
+        console.info(error);
+        this.$message.error(
+          `load resource failed with ${JSON.stringify(error)}`
+        );
+      }
+    },
     onSearch(ip) {
       console.info(`search ip ${ip}`);
       this.form.validateFields((err, values) => {
@@ -101,23 +143,23 @@ export default {
           console.log("Received values of form: ", values);
           const { searchIp, searchList } = values;
           // https://regex101.com/r/3ZI0Tq/1/
-          const cidrSubnetRegexp = /^\s*(?<ip>[\d.:a-f]{3,})(?:[\s/,;]+)(?<cidr>\d{1,2})/gim;
-          const maskSubnetRegexp = /^\s*(?<ip>[\d.:a-f]{3,})(?:[\s/,;]+)(?<mask>[\d.:a-f]{3,})/gim;
+          const cidrSubnetRegexp = /^[^\S\r\n]*(?<ip>[\d.:a-f]{3,})(?:[\t\f \/,;]+)(?<cidr>\d{1,2})(?:[\t\f \/,;#]+)(?<comments>.*)$/gim;
+          const maskSubnetRegexp = /^[^\S\r\n]*(?<ip>[\d.:a-f]{3,})(?:[\t\f \/,;]+)(?<mask>[\d.:a-f]{3,})(?:[\t\f \/,;#]+)(?<comments>.*)$/gim;
           const cidrSubnets = [];
           const maskSubnets = [];
           let matches = searchList.matchAll(cidrSubnetRegexp);
           for (const match of matches) {
             const {
-              groups: { ip, cidr }
+              groups: { ip, cidr, comments }
             } = match;
-            cidrSubnets.push({ ip, cidr });
+            cidrSubnets.push({ ip, cidr, comments });
           }
           matches = searchList.matchAll(maskSubnetRegexp);
           for (const match of matches) {
             const {
-              groups: { ip, mask }
+              groups: { ip, mask, comments }
             } = match;
-            maskSubnets.push({ ip, mask });
+            maskSubnets.push({ ip, mask, comments });
           }
           console.info(
             `parsed subnets\ncidrSubnets: ${JSON.stringify(
@@ -132,11 +174,19 @@ export default {
           const matchedMaskSubnets = maskSubnets.filter(item =>
             subnet(item.ip, item.mask).contains(searchIp)
           );
-          const result = [
-            ...matchedCidrSubnets.map(item => `${item.ip}/${item.cidr}`),
-            ...matchedMaskSubnets.map(item => `${item.ip},${item.mask}`)
-          ].join("\n") || 'not found in this list';
-          this.form.setFieldsValue({ result });
+
+          const results =
+            [
+              ...matchedCidrSubnets.map(item => ({
+                ...item,
+                subnet: cidrSubnet(`${item.ip}/${item.cidr}`)
+              })),
+              ...matchedMaskSubnets.map(item => ({
+                ...item,
+                subnet: subnet(item.ip, item.mask)
+              }))
+            ] || [];
+          this.results = results;
         }
       });
     }

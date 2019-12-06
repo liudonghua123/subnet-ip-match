@@ -17,6 +17,10 @@ import {
   Table,
   Row,
   Col,
+  Message,
+  Tag,
+  Popover,
+  Tooltip
 } from 'ant-design-vue';
 import { LocaleProvider } from 'ant-design-vue';
 
@@ -38,3 +42,8 @@ Vue.use(Radio);
 Vue.use(Table);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Message);
+Vue.use(Tag);
+Vue.use(Popover);
+Vue.use(Tooltip);
+
