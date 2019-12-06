@@ -101,8 +101,8 @@ export default {
           console.log("Received values of form: ", values);
           const { searchIp, searchList } = values;
           // https://regex101.com/r/3ZI0Tq/1/
-          const cidrSubnetRegexp = /(?<ip>[\d.:a-f]{3,})(?:[\s/,;]+)(?<cidr>\d{1,2})/gim;
-          const maskSubnetRegexp = /(?<ip>[\d.:a-f]{3,})(?:[\s/,;]+)(?<mask>[\d.:a-f]{3,})/gim;
+          const cidrSubnetRegexp = /^\s*(?<ip>[\d.:a-f]{3,})(?:[\s/,;]+)(?<cidr>\d{1,2})/gim;
+          const maskSubnetRegexp = /^\s*(?<ip>[\d.:a-f]{3,})(?:[\s/,;]+)(?<mask>[\d.:a-f]{3,})/gim;
           const cidrSubnets = [];
           const maskSubnets = [];
           let matches = searchList.matchAll(cidrSubnetRegexp);
@@ -135,7 +135,7 @@ export default {
           const result = [
             ...matchedCidrSubnets.map(item => `${item.ip}/${item.cidr}`),
             ...matchedMaskSubnets.map(item => `${item.ip},${item.mask}`)
-          ].join("\n");
+          ].join("\n") || 'not found in this list';
           this.form.setFieldsValue({ result });
         }
       });
