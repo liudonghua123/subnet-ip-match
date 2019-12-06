@@ -131,11 +131,9 @@ export default {
             `load resource failed with HTTP-Error: ${response.status}`
           );
         }
-      } catch (error) {
-        console.info(error);
-        this.$message.error(
-          `load resource failed with ${JSON.stringify(error)}`
-        );
+      } catch (err) {
+        console.info(err);
+        this.$message.error(`load resource failed with ${err}`);
       }
     },
     onSearch(ip) {
