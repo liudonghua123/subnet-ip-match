@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- stable
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: dist
+  keep-history: true
+  on:
+    branch: master
+  github-token:
+    secure: FRxX65usiz6dvg+d/1NY5v5+tUM9q9QbZRQgvDzzihFbECQrP1F+cagxcuuRKDpq1hU8F2PuV6IQp6UW33IUwYH/nxtIWqSQLK8Sf8olIJFS7qr7nwluFMjm3guyXKK2Dferoom5RX2V56FU0qqwYLsTAA+7ZpE2c0OR5cX/f/c0lxSsclvhL3NRqEh3oN5lUR8MNATG1MU4MAXQSDWPMeAwojHlBhEusDjzYGOHzSFWYLYaRBInIjH19Y3wvM0BGGas9lPbLZeocqt7Kg7Gd1p9I4CiZbVVW1lma/lSYUpkmTIX9BfOko0rjcPl2gL9hQCjDXeZGmRabzuTqUk1q4PMsCo0p5QfyMSIK0mZZD3L34HwwIra5i6iRepbK2mnqYaWtHII4x0W3SCU3fF+iKiFf7HCFdmLLoj2lmIdtxabU0Ol6vcIBeCO9E2cgyGoHerSt5M2lob9RYt9qzIV8dk7mfOreMcWy76s20OFo1ys7iPIxcMmyQVNORbZlER3YE4eM0tESvnyITd5vOaCkG6ABPxTAc+fPOrOC+RajLvxbx8DeDv6yb5Ux8T4bG5c7a92zsnIisud5CGUpKL0k2T/R9jywWkwqL52+yBy0pgEMr9kfgdrwP5Txtl/y5VMqXUvDgfZRRM5fnD1y40ebJ0q2WtE4cV1I+pKtK8TMcs=
+before_script:
+- npm i -g @vue/cli
+- npm i
+script:
+- npm run test
+after_success:
+- npm run deploy
