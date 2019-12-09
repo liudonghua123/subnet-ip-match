@@ -7,6 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "deploy": "npm run build && gh-pages -d dist",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
     "test": "echo ok"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
+    "all-contributors-cli": "^6.11.2",
     "babel-eslint": "^10.0.3",
     "babel-plugin-import": "^1.11.0",
     "eslint": "^5.16.0",
