@@ -1,7 +1,9 @@
 <template>
-  <a-layout id="components-layout-demo-top" class="layout">
+  <a-layout id="app" class="layout">
     <a-layout-header>
-      <div class="logo" />
+      <div class="logo">
+        <img alt="logo" src="./assets/logo.png" />
+      </div>
       <a-menu
         theme="dark"
         mode="horizontal"
@@ -72,6 +74,7 @@
                   ]"
                   placeholder="input list of subnet or cidrSubnet like 1.1.0.0/16 or 1.1.0.0,255.255.0.0"
                   :rows="10"
+                  size="large"
                 />
               </a-form-item>
             </a-col>
@@ -79,18 +82,18 @@
           <a-row>
             <a-col :span="24">
               <a-form-item label="Results">
-                <a-popover
-                  v-for="(item, index) in results"
-                  :key="index"
-                  title="More info"
-                >
+                <a-popover v-for="(item, index) in results" :key="index" title="详细信息">
                   <template slot="content">
-                    <p>{{ JSON.stringify(item, null, 2) }}</p>
+                    <p>起始地址: {{ item.subnet.firstAddress }}</p>
+                    <p>结束地址: {{ item.subnet.lastAddress }}</p>
+                    <p>广播地址: {{ item.subnet.broadcastAddress }}</p>
+                    <p>子网掩码: {{ item.subnet.subnetMask }}</p>
+                    <p>IP数量: {{ item.subnet.numHosts }}</p>
                   </template>
-                  <a-tag color="green"
-                    >{{ item.ip }} {{ item.cidr || item.mask }} #
-                    {{ item.comments }}</a-tag
-                  >
+                  <a-tag color="green" class="large-text">
+                    {{ item.ip }} {{ item.cidr || item.mask }} #
+                    {{ item.comments }}
+                  </a-tag>
                 </a-popover>
               </a-form-item>
             </a-col>
@@ -98,9 +101,7 @@
         </a-form>
       </div>
     </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      liudonghua123 ©2019 Created by Ant UED
-    </a-layout-footer>
+    <a-layout-footer style="text-align: center">liudonghua123 ©2019 Created by Ant UED</a-layout-footer>
   </a-layout>
 </template>
 <script>
@@ -108,6 +109,7 @@
 /*eslint no-unused-vars: "warn"*/
 /*eslint no-useless-escape: "warn"*/
 import { subnet, cidrSubnet } from "browserify-ip";
+import logo from "./assets/logo.png";
 
 export default {
   beforeCreate() {
@@ -129,11 +131,9 @@ export default {
             `load resource failed with HTTP-Error: ${response.status}`
           );
         }
-      } catch (error) {
-        console.info(error);
-        this.$message.error(
-          `load resource failed with ${JSON.stringify(error)}`
-        );
+      } catch (err) {
+        console.info(err);
+        this.$message.error(`load resource failed with ${err}`);
       }
     },
     onSearch(ip) {
@@ -194,11 +194,18 @@ export default {
 };
 </script>
 <style>
-#components-layout-demo-top .logo {
+#app .logo {
   width: 120px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
+  height: 54px;
+  margin: 5px 28px 5px 0;
   float: left;
+}
+#app .logo img {
+  height: 100%;
+  display: block;
+}
+
+#app .large-text {
+  font-size: 1.25em;
 }
 </style>

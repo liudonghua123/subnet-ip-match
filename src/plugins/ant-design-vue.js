@@ -17,10 +17,10 @@ import {
   Table,
   Row,
   Col,
-  Message,
+  message,
   Tag,
   Popover,
-  Tooltip
+  Tooltip,
 } from 'ant-design-vue';
 import { LocaleProvider } from 'ant-design-vue';
 
@@ -42,8 +42,8 @@ Vue.use(Radio);
 Vue.use(Table);
 Vue.use(Row);
 Vue.use(Col);
-Vue.use(Message);
 Vue.use(Tag);
 Vue.use(Popover);
 Vue.use(Tooltip);
 
+Vue.prototype.$message = message;
