@@ -1,0 +1,24 @@
+{
+  "projectName": "subnet-ip-match",
+  "projectOwner": "liudonghua123",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "liudonghua123",
+      "name": "liudonghua",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2276718?v=4",
+      "profile": "http://blog.liudonghua.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
