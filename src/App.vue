@@ -105,9 +105,9 @@
   </a-layout>
 </template>
 <script>
-/*eslint no-console: "warn"*/
-/*eslint no-unused-vars: "warn"*/
-/*eslint no-useless-escape: "warn"*/
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-escape */
 import { subnet, cidrSubnet } from "browserify-ip";
 import logo from "./assets/logo.png";
 
