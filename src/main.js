@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './plugins/ant-design-vue.js'
+// import './plugins/ant-design-vue.js'
+import './plugins/vuesax'
 
 Vue.config.productionTip = false
 

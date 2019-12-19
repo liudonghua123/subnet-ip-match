@@ -5240,6 +5240,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+material-icons@^0.3.1:
+  version "0.3.1"
+  resolved "http://r.cnpmjs.org/material-icons/download/material-icons-0.3.1.tgz#425e06e2448632d6249d6e1ffe2993682c5b171e"
+  integrity sha1-Ql4G4kSGMtYknW4f/imTaCxbFx4=
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.npm.taobao.org/md5.js/download/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -8442,6 +8447,19 @@ vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
+
+vue@^2.6.9:
+  version "2.6.11"
+  resolved "http://r.cnpmjs.org/vue/download/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
+  integrity sha1-dllNh31LEiNEBuhONSdcbVFBJcU=
+
+vuesax@^3.11.2:
+  version "3.11.2"
+  resolved "http://r.cnpmjs.org/vuesax/download/vuesax-3.11.2.tgz#74d03ad2c0d7e348fbacfd14b2136729a4b63461"
+  integrity sha1-dNA60sDX40j7rP0UshNnKaS2NGE=
+  dependencies:
+    chalk "^2.4.2"
+    vue "^2.6.9"
 
 warning@^3.0.0:
   version "3.0.0"
