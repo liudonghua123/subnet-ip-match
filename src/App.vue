@@ -143,8 +143,8 @@ export default {
           console.log("Received values of form: ", values);
           const { searchIp, searchList } = values;
           // https://regex101.com/r/3ZI0Tq/1/
-          const cidrSubnetRegexp = /^[^\S\r\n]*(?<ip>[\d.:a-f]{3,})(?:[\t\f \/,;]+)(?<cidr>\d{1,2})(?:[\t\f \/,;#]+)(?<comments>.*)$/gim;
-          const maskSubnetRegexp = /^[^\S\r\n]*(?<ip>[\d.:a-f]{3,})(?:[\t\f \/,;]+)(?<mask>[\d.:a-f]{3,})(?:[\t\f \/,;#]+)(?<comments>.*)$/gim;
+          const cidrSubnetRegexp = /^[^\S\r\n]*(?<ip>[\d.:a-f]{3,})(?:[\t\f \/,;]+)(?<cidr>\d{1,2})(?:[\t\f \/,;#]+)?(?<comments>.*)$/gim;
+          const maskSubnetRegexp = /^[^\S\r\n]*(?<ip>[\d.:a-f]{3,})(?:[\t\f \/,;]+)(?<mask>[\d.:a-f]{3,})(?:[\t\f \/,;#]+)?(?<comments>.*)$/gim;
           const cidrSubnets = [];
           const maskSubnets = [];
           let matches = searchList.matchAll(cidrSubnetRegexp);
