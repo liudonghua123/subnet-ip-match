@@ -778,6 +778,14 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@liudonghua123/vuesax@^3.11.2":
+  version "3.11.2"
+  resolved "https://registry.npmjs.org/@liudonghua123/vuesax/-/vuesax-3.11.2.tgz#996b2e0168f7b78a107fda1b2fccdb36be499d3f"
+  integrity sha512-7OnB9uui9Ir22BydOBYSnNkhN+cByzn/dUsUfOKbUxje1we2fGwH4JRjK5d3br8Qxngla4pI9v1uZZ0fKQfTzQ==
+  dependencies:
+    chalk "^2.4.2"
+    vue "^2.6.9"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -8452,14 +8460,6 @@ vue@^2.6.9:
   version "2.6.11"
   resolved "http://r.cnpmjs.org/vue/download/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha1-dllNh31LEiNEBuhONSdcbVFBJcU=
-
-vuesax@^3.11.2:
-  version "3.11.2"
-  resolved "http://r.cnpmjs.org/vuesax/download/vuesax-3.11.2.tgz#74d03ad2c0d7e348fbacfd14b2136729a4b63461"
-  integrity sha1-dNA60sDX40j7rP0UshNnKaS2NGE=
-  dependencies:
-    chalk "^2.4.2"
-    vue "^2.6.9"
 
 warning@^3.0.0:
   version "3.0.0"

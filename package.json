@@ -12,12 +12,12 @@
     "test": "echo ok"
   },
   "dependencies": {
+    "@liudonghua123/vuesax": "^3.11.2",
     "ant-design-vue": "^1.2.4",
     "browserify-ip": "^0.0.1",
     "core-js": "^3.4.3",
     "material-icons": "^0.3.1",
-    "vue": "^2.6.10",
-    "vuesax": "^3.11.2"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
